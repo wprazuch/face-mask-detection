@@ -13,50 +13,6 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.preprocessing.image import img_to_array
 
 
-def check_face_masks(image, face_detector, facemask_classifier):
-    """Searches for faces in the image and returns class of the face,
-    whether it does have a mask on it or not
-
-    Parameters
-    ----------
-    image : [type]
-        [description]
-    face_detector : [type]
-        [description]
-    facemask_classifier : [type]
-        [description]
-
-    Returns
-    -------
-    list
-        list of dicts with detection-classification metadata of every face in the image
-    """
-
-    detections = detect_faces(image, face_detector)
-
-    image_detection_classification_results = []
-
-    for i in range(0, detections.shape[2]):
-
-        confidence = detections[0, 0, i, 2]
-
-        if confidence > 0.5:
-            detection = detections[0, 0, i, 3:7]
-            face, detection_info = extract_face(image, detection)
-
-            (mask, withoutMask) = facemask_classifier.predict(face)[0]
-
-            label = "Mask" if mask > withoutMask else "No Mask"
-
-            detection_info['class'] = label
-
-            detection_info['probability'] = max(mask, withoutMask) * 100
-
-            image_detection_classification_results.append(detection_info)
-
-    return image_detection_classification_results
-
-
 def detect_faces(image, face_detector):
     """Detects faces in the image
 
@@ -115,6 +71,50 @@ def extract_face(image, detection):
     face = np.expand_dims(face, axis=0)
 
     return face, bounding_box_cords
+
+
+def get_classified_face_masks(image, face_detector, facemask_classifier):
+    """Searches for faces in the image and returns class of the face,
+    whether it does have a mask on it or not
+
+    Parameters
+    ----------
+    image : [type]
+        [description]
+    face_detector : [type]
+        [description]
+    facemask_classifier : [type]
+        [description]
+
+    Returns
+    -------
+    list
+        list of dicts with detection-classification metadata of every face in the image
+    """
+
+    detections = detect_faces(image, face_detector)
+
+    image_detection_classification_results = []
+
+    for i in range(0, detections.shape[2]):
+
+        confidence = detections[0, 0, i, 2]
+
+        if confidence > 0.5:
+            detection = detections[0, 0, i, 3:7]
+            face, detection_info = extract_face(image, detection)
+
+            (mask, withoutMask) = facemask_classifier.predict(face)[0]
+
+            label = "Mask" if mask > withoutMask else "No Mask"
+
+            detection_info['class'] = label
+
+            detection_info['probability'] = max(mask, withoutMask) * 100
+
+            image_detection_classification_results.append(detection_info)
+
+    return image_detection_classification_results
 
 
 def load_caffe_model(caffe_model_path):
