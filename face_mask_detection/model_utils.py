@@ -13,6 +13,14 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.preprocessing.image import img_to_array
 
 
+def get_classified_face_masks_rest(image, face_detector_path, facemask_classifier_path):
+    facemask_classifier = load_model(facemask_classifier_path)
+    face_detector = load_caffe_model(face_detector_path)
+    image_detection_classification_results = get_classified_face_masks(
+        image, face_detector, facemask_classifier)
+    return image_detection_classification_results
+
+
 def detect_faces(image, face_detector):
     """Detects faces in the image
 
@@ -57,10 +65,10 @@ def extract_face(image, detection):
     (end_x, end_y) = (min(w - 1, endX), min(h - 1, endY))
 
     bounding_box_cords = {
-        'start_x': start_x,
-        'start_y': start_y,
-        'end_x': end_x,
-        'end_y': end_y
+        'start_x': int(start_x),
+        'start_y': int(start_y),
+        'end_x': int(end_x),
+        'end_y': int(end_y)
     }
 
     face = image[startY:endY, startX:endX]
