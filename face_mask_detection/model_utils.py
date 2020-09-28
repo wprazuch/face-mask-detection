@@ -11,6 +11,7 @@ from face_mask_detection import utils
 
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.preprocessing.image import img_to_array
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 
 def get_classified_face_masks_rest(image, face_detector_path, facemask_classifier_path):
