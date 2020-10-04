@@ -9,6 +9,10 @@ and draws bounding boxes around them. Next, these bounding boxes are cropped fro
 mode. The classifier checks, whether the person in the image wears a mask or not. This way, the system can spot people in the image with masks and
 without masks.
 
+## Data
+Part of the data used for classification was reused from [there](https://github.com/chandrikadeb7/Face-Mask-Detection) and [there](https://www.pyimagesearch.com/2020/05/04/covid-19-face-mask-detector-with-opencv-keras-tensorflow-and-deep-learning/). The test images were collected from the web
+and used for visualization purposes and debugging.
+
 ## Methods
 The solution was implemented mainly by using OpenCV and Tensorflow libraries. As stated previously, for face
 detection, a pretrained model based on ResNet architecture was used. For classification, a MobileNet V2 architecture
