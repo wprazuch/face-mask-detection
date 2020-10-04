@@ -17,3 +17,6 @@ available from Keras API was used and trained.
 ## Next steps
 The solution could be extended to the video-mode. This application would be useful in real-world, as the system could be embedded into supervision cameras, which
 will notify about persons not wearing masks (and i.e. entering a building).
+
+### Endnote
+Feel free to check my other projects on my [Github Pages Site](https://wprazuch.github.io/).
