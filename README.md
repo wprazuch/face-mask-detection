@@ -1,4 +1,4 @@
-# Face mask detection
+# Face Mask Detection
 
 ![Face-mask-detection](static/output_example.png)
 
