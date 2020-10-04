@@ -1,21 +1,20 @@
 import json
-import matplotlib.pyplot as plt
-from . import model_utils
-from . import utils
-import flask
-from flask import Flask, request, Response
-import jsonpickle
-import numpy as np
-import cv2
-
-import tensorflow as tf
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.models import load_model
-
-import numpy as np
-from .model_utils import get_classified_face_masks, load_caffe_model
 import os
+
+import cv2
+import flask
+import jsonpickle
+import matplotlib.pyplot as plt
+import numpy as np
+import tensorflow as tf
+from face_mask_detection import model_utils, utils
+from face_mask_detection.model_utils import (get_classified_face_masks,
+                                             load_caffe_model)
+from flask import Flask, Response, request
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array
+
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 
