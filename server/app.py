@@ -59,7 +59,7 @@ def test():
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
+    return "<h1>Facemask detection</h1><p>Detect faces, facemasks using API.</p>"
 
 
 if __name__ == '__main__':
