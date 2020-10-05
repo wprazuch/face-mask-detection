@@ -111,9 +111,9 @@ def visualize_detection_classification_results(image, detection_classification_r
         # display the label and bounding box rectangle on the output
         # frame
         cv2.putText(image, label, (result['start_x'], result['start_y'] - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 2)
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
         cv2.rectangle(image, (result['start_x'], result['start_y']),
-                      (result['end_x'], result['end_y']), color, 2)
+                      (result['end_x'], result['end_y']), color, 4)
 
         im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
