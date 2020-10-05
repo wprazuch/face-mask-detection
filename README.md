@@ -1,6 +1,6 @@
 # Face Mask Detection
 
-![Face-mask-detection](static/output_example.png)
+![Face-mask-detection](static/output1.png)
 
 This repository contains a project devoted to detect face masks in the images. The solution is 
 composed of two steps - first, a face detector (pretrained Caffe model, downloaded from
@@ -17,6 +17,15 @@ and used for visualization purposes and debugging.
 The solution was implemented mainly by using OpenCV and Tensorflow libraries. As stated previously, for face
 detection, a pretrained model based on ResNet architecture was used. For classification, a MobileNet V2 architecture
 available from Keras API was used and trained.
+
+To train a classification model, use:
+`python train.py`
+
+To check all the optional arguments, use:
+`python train.py -h`
+
+By default, the script will save the model to `models/face-mask-classifier` directory.
+
 
 ## Next steps
 The solution could be extended to the video-mode. This application would be useful in real-world, as the system could be embedded into supervision cameras, which
