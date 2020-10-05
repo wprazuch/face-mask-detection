@@ -18,7 +18,7 @@ from tensorflow.keras.preprocessing.image import img_to_array
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 
-facemask_classifier_path = r'models/facemask-classifier'
+facemask_classifier_path = r'models/face-mask-classifier'
 face_detector_path = r'models/face-detector'
 
 
@@ -37,21 +37,11 @@ app.config["DEBUG"] = True
 @app.route('/api/image', methods=['POST'])
 def test():
     r = request
-    # convert string of image data to uint8
     nparr = np.fromstring(r.data, np.uint8)
-    # decode image
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-    # do some fancy processing here....
-    # test_image = r'dataset/test_detection/4.jpg'
-    # image = cv2.imread(test_image)
-
-    # build a response dict to send back to client
-    print("Before function")
     det_class_result = get_classified_face_masks(
         image, face_detector, facemask_classifier)
-    print("After function")
-    # encode response using jsonpickle
     response_json = json.dumps(det_class_result, indent=4)
 
     return Response(response=response_json, status=200, mimetype="application/json")
@@ -63,5 +53,12 @@ def home():
 
 
 if __name__ == '__main__':
+    from argparse import ArgumentParser
+    parser = ArgumentParser("Flask app that server face mask detection from the image")
+    parser.add_argument('--classifier_path', default=r'models/face-mask-classifier', type=str,
+                        help='classification model path')
+    parser.add_argument('--detector_path', default=r'models/face-detector', type=str,
+                        help='detection model path')
+    args = parser.parse_args()
 
     app.run()
