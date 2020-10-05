@@ -1,6 +1,6 @@
 # Face Mask Detection
 
-![Face-mask-detection](static/example_output.png)
+![Face-mask-detection](static/output_example.png)
 
 This repository contains a project devoted to detect face masks in the images. The solution is 
 composed of two steps - first, a face detector (pretrained Caffe model, downloaded from
