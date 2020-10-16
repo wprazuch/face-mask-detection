@@ -113,17 +113,21 @@ def get_classified_face_masks(image, face_detector, facemask_classifier):
             detection = detections[0, 0, i, 3:7]
             face, detection_info = extract_face(image, detection)
 
-            (mask, withoutMask) = facemask_classifier.predict(face)[0]
-
-            label = "Mask" if mask > withoutMask else "No Mask"
+            label, mask, without_mask = predict_facemask(face, facemask_classifier)
 
             detection_info['class'] = label
 
-            detection_info['probability'] = max(mask, withoutMask) * 100
+            detection_info['probability'] = max(mask, without_mask) * 100
 
             image_detection_classification_results.append(detection_info)
 
     return image_detection_classification_results
+
+
+def predict_facemask(face_image, facemask_classifier):
+    (mask, without_mask) = facemask_classifier.predict(face_image)[0]
+    label = "Mask" if mask > without_mask else "No Mask"
+    return label, mask, without_mask
 
 
 def load_caffe_model(caffe_model_path):
