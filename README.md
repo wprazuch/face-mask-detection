@@ -26,6 +26,15 @@ To check all the optional arguments, use:
 
 By default, the script will save the model to `models/face-mask-classifier` directory.
 
+This app can be launched in Docker. To set it up, simply run a following command from the root directory of the repo:
+```
+docker build -t facemask -f docker/development.dockerfile .
+```
+To launch the Flask server on port 5000, run:
+```
+docker run -p 5000:5000  facemask python -m server.app
+```
+
 
 ## Next steps
 The solution could be extended to the video-mode. This application would be useful in real-world, as the system could be embedded into supervision cameras, which
