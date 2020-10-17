@@ -14,7 +14,7 @@ from tensorflow.keras.preprocessing.image import img_to_array
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 
-def get_classified_face_masks_rest(image, face_detector_path, facemask_classifier_path):
+def get_classified_face_masks_from_path(image, face_detector_path, facemask_classifier_path):
     facemask_classifier = load_model(facemask_classifier_path)
     face_detector = load_caffe_model(face_detector_path)
     image_detection_classification_results = get_classified_face_masks(

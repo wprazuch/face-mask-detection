@@ -116,7 +116,7 @@ def start_server():
         'face_detector': face_detector,
         'facemask_classifier': facemask_classifier})
 
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
 
     return app
 

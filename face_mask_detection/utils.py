@@ -118,3 +118,40 @@ def visualize_detection_classification_results(image, detection_classification_r
         im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
     return im_rgb
+
+
+def visualize_detection_classification_results(image, detection_classification_results):
+    """Returns image with bounding boxes around faces annotated with class labels
+
+    Parameters
+    ----------
+    image : [type]
+        [description]
+    detection_classification_results : [type]
+        [description]
+
+    Returns
+    -------
+    [type]
+        [description]
+    """
+
+    for result in detection_classification_results:
+
+        label = result['class']
+
+        color = (0, 255, 0) if label == "Mask" else (0, 0, 255)
+
+        # include the probability in the label
+        label = "{}: {:.2f}%".format(label, result['probability'])
+
+        # display the label and bounding box rectangle on the output
+        # frame
+        cv2.putText(image, label, (result['start_x'], result['start_y'] - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
+        cv2.rectangle(image, (result['start_x'], result['start_y']),
+                      (result['end_x'], result['end_y']), color, 4)
+
+        im_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+    return im_rgb
